@@ -56,7 +56,9 @@ class Cramer:
 
         det = 0
         for i, j in enumerate(arr[0]):
-            det += j * ((-1) ** i) * Cramer.get_det(Cramer.arr_remove(arr, i), size - 1)
+            det += j * ((-1) ** i) * Cramer.get_det(
+                Cramer.arr_remove(arr, i), size - 1
+                )
 
         return det
 
