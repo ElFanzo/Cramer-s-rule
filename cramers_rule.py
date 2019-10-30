@@ -13,7 +13,7 @@ class Cramer:
         :return: X, the solution vector
         """
         det = Cramer.get_det_if_valid(arr_a, arr_b)
-        
+
         arr_x = [
             Cramer.get_det(Cramer.arr_replace(arr_a, arr_b, i)) / det
             for i in range(len(arr_a))
@@ -53,7 +53,6 @@ class Cramer:
 
         return det
 
-
     @staticmethod
     def get_det(arr):
         """Get the determinant of an array.
@@ -66,9 +65,7 @@ class Cramer:
 
         det = 0
         for i, j in enumerate(arr[0]):
-            det += j * ((-1) ** i) * Cramer.get_det(
-                Cramer.arr_remove(arr, i)
-                )
+            det += j * ((-1) ** i) * Cramer.get_det(Cramer.arr_remove(arr, i))
 
         return det
 
@@ -93,7 +90,7 @@ class Cramer:
     def arr_replace(arr, col, index):
         """Replace the index-th column from an array by a column vector of
         right-hand-sides of equations.
-        
+
         :param arr: An array
         :param col: A column vector
         :param index: An index
