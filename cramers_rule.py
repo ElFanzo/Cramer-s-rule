@@ -14,6 +14,17 @@ class Cramer:
         :param arr_b: The column vector of right-hand-sides of equations
         :return: X, the solution vector
         """
+        det = Cramer.get_det_if_valid(arr_a, arr_b)
+        
+        arr_x = [
+            Cramer.get_det(Cramer.arr_replace(arr_a, arr_b, i)) / det
+            for i in range(len(arr_a))
+        ]
+
+        return arr_x
+
+    @staticmethod
+    def get_det_if_valid(arr_a, arr_b):
         if not (arr_a and arr_b):
             raise ValueError(
                 "The matrix or the column vector of right-hand-sides of the "
@@ -30,34 +41,29 @@ class Cramer:
         if size != 1:
             for arr in arr_a:
                 if len(arr) != size:
-                    raise ValueError("The matrix is not quadratic!")
+                    raise ValueError("The matrix must be quadratic!")
 
-        det = Cramer.get_det(arr_a, size)
+        det = Cramer.get_det(arr_a)
         if not det:
             raise ValueError("The matrix determinant must not be 0!")
 
-        arr_x = [
-            Cramer.get_det(Cramer.arr_replace(arr_a, arr_b, i), size) / det
-            for i in range(size)
-        ]
+        return det
 
-        return arr_x
 
     @staticmethod
-    def get_det(arr, size):
+    def get_det(arr):
         """
         Get the determinant of an array.
         :param arr: An array
-        :param size: The size of an array
         :return: The array determinant
         """
-        if size == 1:
+        if len(arr) == 1:
             return arr[0]
 
         det = 0
         for i, j in enumerate(arr[0]):
             det += j * ((-1) ** i) * Cramer.get_det(
-                Cramer.arr_remove(arr, i), size - 1
+                Cramer.arr_remove(arr, i)
                 )
 
         return det
