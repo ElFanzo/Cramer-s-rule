@@ -1,4 +1,5 @@
-from unittest import TestCase, main
+from unittest import main, TestCase
+
 from cramers_rule import Cramer
 
 
