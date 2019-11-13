@@ -88,8 +88,7 @@ class Cramer:
 
     @staticmethod
     def arr_replace(arr, col, index):
-        """Replace the index-th column from an array by a column vector of
-        right-hand-sides of equations.
+        """Replace the index-th column from an array by a column vector.
 
         :param arr: An array
         :param col: A column vector
