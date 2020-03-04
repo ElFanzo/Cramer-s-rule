@@ -1,6 +1,6 @@
 from unittest import main, TestCase
 
-from cramers_rule import arr_remove, arr_replace_column, solve
+from cramers_rule import arr_remove, arr_replace_column, get_det, solve
 
 
 class TestSolve(TestCase):
@@ -28,14 +28,6 @@ class TestSolve(TestCase):
         ]
         arr_b = [2, -5, 3, 0]
         self.assertListEqual(solve(arr_a, arr_b), [1, 2, 3, -1])
-
-        arr_a = [
-            [2, 5, 4],
-            [1, 3, 2],
-            [2, 10, 9],
-        ]
-        arr_b = [30, 150, 110]
-        self.assertListEqual(solve(arr_a, arr_b), [-152, 270, -254])
 
         arr_a = [2]
         arr_b = [14]
@@ -75,6 +67,11 @@ class TestSolve(TestCase):
             [14, 0],
         ]
         arr_b = [15, 17]
+        with self.assertRaises(ValueError):
+            solve(arr_a, arr_b)
+
+        arr_a = [4, 6, 8]
+        arr_b = [6, 5, 0]
         with self.assertRaises(ValueError):
             solve(arr_a, arr_b)
 
@@ -194,6 +191,41 @@ class TestArrRemove(TestCase):
     def test_wrong_index(self):
         with self.assertRaises(IndexError):
             arr_remove(self.arr, 3)
+
+
+class TestGetDet(TestCase):
+    def test_array(self):
+        arr = [
+            [2, 5, 4],
+            [1, 3, 2],
+            [2, 10, 9],
+        ]
+        self.assertEqual(get_det(arr), 5)
+
+        arr = [
+            [1, 1],
+            [3, 2],
+        ]
+        self.assertEqual(get_det(arr), -1)
+
+        arr = [
+            [2, -4, 1, -5],
+            [4, -7, -1, -8],
+            [10, -18, 2, -23],
+            [2, -3, 1, -1],
+        ]
+        self.assertEqual(get_det(arr), 24)
+
+    def test_single_array(self):
+        arr = [2]
+        self.assertEqual(get_det(arr), 2)
+
+    def test_array_with_zero_determinant(self):
+        arr = [
+            [1, -2],
+            [-2, 4],
+        ]
+        self.assertEqual(get_det(arr), 0)
 
 
 if __name__ == "__main__":
