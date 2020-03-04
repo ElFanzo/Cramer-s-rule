@@ -1,6 +1,6 @@
 from unittest import main, TestCase
 
-from cramers_rule import arr_replace_column, solve
+from cramers_rule import arr_remove, arr_replace_column, solve
 
 
 class TestSolve(TestCase):
@@ -141,6 +141,59 @@ class TestArrReplaceColumn(TestCase):
     def test_wrong_index(self):
         with self.assertRaises(IndexError):
             arr_replace_column(self.arr_a, self.arr_b, 3)
+
+
+class TestArrRemove(TestCase):
+    def setUp(self) -> None:
+        self.arr = [
+            [2, 5, 4],
+            [1, 3, 2],
+            [2, 10, 9],
+        ]
+
+    def test_array(self):
+        self.assertListEqual(
+            arr_remove(self.arr, 0),
+            [
+                [3, 2],
+                [10, 9],
+            ]
+        )
+        self.assertListEqual(
+            arr_remove(self.arr, 1),
+            [
+                [1, 2],
+                [2, 9],
+            ]
+        )
+        self.assertListEqual(
+            arr_remove(self.arr, 2),
+            [
+                [1, 3],
+                [2, 10],
+            ]
+        )
+
+    def test_tetra_array(self):
+        arr = [
+            [3, 4],
+            [6, 7]
+        ]
+        self.assertListEqual(arr_remove(arr, 0), [7])
+        self.assertListEqual(arr_remove(arr, 1), [6])
+
+    def test_negative_index(self):
+        self.assertListEqual(
+            arr_remove(self.arr, -1),
+            [
+                [1, 3],
+                [2, 10],
+            ]
+        )
+
+    def test_wrong_index(self):
+        with self.assertRaises(IndexError):
+            arr_remove(self.arr, 3)
 
 
 if __name__ == "__main__":
