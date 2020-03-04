@@ -1,9 +1,10 @@
 """Solve SLAE using Cramer's rule."""
 
 from copy import deepcopy
+from typing import Union
 
 
-def solve(arr_a, arr_b):
+def solve(arr_a, arr_b: Union[list, tuple]) -> tuple:
     """Find the solution of the SLAE.
 
     :param arr_a: The coefficient matrix of equations
@@ -12,15 +13,15 @@ def solve(arr_a, arr_b):
     """
     det = get_det_if_valid(arr_a, arr_b)
 
-    arr_x = [
+    arr_x = tuple(
         get_det(arr_replace_column(arr_a, arr_b, i)) / det
         for i in range(len(arr_a))
-    ]
+    )
 
     return arr_x
 
 
-def get_det_if_valid(arr_a, arr_b):
+def get_det_if_valid(arr_a, arr_b: Union[list, tuple]) -> Union[int, float]:
     """Get the determinant of an array A, if arrays are correct.
 
     :param arr_a: The coefficient matrix of equations
@@ -52,7 +53,7 @@ def get_det_if_valid(arr_a, arr_b):
     return det
 
 
-def get_det(arr):
+def get_det(arr) -> Union[int, float]:
     """Get the determinant of an array.
 
     :param arr: An array
@@ -68,7 +69,7 @@ def get_det(arr):
     return det
 
 
-def arr_remove(arr, index):
+def arr_remove(arr, index: int):
     """Remove the 1st row and the index-th column from an array.
 
     :param arr: An array
@@ -85,7 +86,7 @@ def arr_remove(arr, index):
     return res
 
 
-def arr_replace_column(arr, col, index):
+def arr_replace_column(arr, col: Union[list, tuple], index: int):
     """Replace the index-th column from an array by a column vector.
 
     :param arr: An array

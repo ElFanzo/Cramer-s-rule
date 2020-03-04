@@ -11,14 +11,14 @@ class TestSolve(TestCase):
             [2, 10, 9],
         ]
         arr_b = [30, 150, 110]
-        self.assertListEqual(solve(arr_a, arr_b), [-152, 270, -254])
+        self.assertTupleEqual(solve(arr_a, arr_b), (-152, 270, -254))
 
         arr_a = [
             [1, -1],
             [3, 2],
         ]
         arr_b = [7, 16]
-        self.assertListEqual(solve(arr_a, arr_b), [6, -1])
+        self.assertTupleEqual(solve(arr_a, arr_b), (6, -1))
 
         arr_a = [
             [2, -4, 1, -5],
@@ -27,11 +27,11 @@ class TestSolve(TestCase):
             [2, -3, 1, -1],
         ]
         arr_b = [2, -5, 3, 0]
-        self.assertListEqual(solve(arr_a, arr_b), [1, 2, 3, -1])
+        self.assertTupleEqual(solve(arr_a, arr_b), (1, 2, 3, -1))
 
         arr_a = [2]
         arr_b = [14]
-        self.assertListEqual(solve(arr_a, arr_b), [7])
+        self.assertTupleEqual(solve(arr_a, arr_b), (7,))
 
     def test_empty_array(self):
         with self.assertRaises(ValueError):
