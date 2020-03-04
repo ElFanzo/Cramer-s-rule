@@ -42,7 +42,7 @@ def get_det_if_valid(arr_a, arr_b):
 
     if size != 1:
         for arr in arr_a:
-            if len(arr) != size:
+            if not isinstance(arr, list) or len(arr) != size:
                 raise ValueError("The matrix must be quadratic!")
 
     det = get_det(arr_a)
