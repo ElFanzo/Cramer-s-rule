@@ -13,7 +13,7 @@ def solve(arr_a, arr_b):
     det = get_det_if_valid(arr_a, arr_b)
 
     arr_x = [
-        get_det(arr_replace(arr_a, arr_b, i)) / det
+        get_det(arr_replace_column(arr_a, arr_b, i)) / det
         for i in range(len(arr_a))
     ]
 
@@ -85,7 +85,7 @@ def arr_remove(arr, index):
     return res
 
 
-def arr_replace(arr, col, index):
+def arr_replace_column(arr, col, index):
     """Replace the index-th column from an array by a column vector.
 
     :param arr: An array
