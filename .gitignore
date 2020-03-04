@@ -3,3 +3,6 @@
 
 # Flake8 config
 .flake8
+
+# IDE files
+.idea/
